@@ -32,6 +32,8 @@ Instead of manually creating boilerplate files and running the same git initiali
 
 ## ✨ Features
 
+- **Interactive Prompts**: Run `devmate new` with no arguments to launch a step-by-step interactive setup wizard!
+- **Beautiful Terminal UI**: Enjoy colorful formatting, beautifully rendered tables, and animated progress spinners.
 - **Blazing Fast Setup**: Generate fully-functional boilerplates in milliseconds.
 - **Multi-language Support**: Built-in templates for Python, Node.js, React, and Vanilla Web.
 - **Git Automation**: Initialize repositories, create `.gitignore` files, and add remotes in one command.
@@ -69,10 +71,13 @@ Devmate currently supports the following commands:
 
 Creates a new project directory and populates it with boilerplate code for a specific language or framework.
 
-**Syntax:**
+**Interactive Mode:**
+If you run `devmate new` without any arguments, an interactive wizard will launch to guide you through the process!
+
+**Syntax (Optional):**
 
 ```bash
-devmate new <project_name> --template <template_type> [--git]
+devmate new [project_name] [--template <template_type>] [--git]
 ```
 
 **Templates Available:**

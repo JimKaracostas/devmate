@@ -2,6 +2,9 @@ import os
 import subprocess
 import json
 from pathlib import Path
+from rich.console import Console
+
+console = Console()
 
 TEMPLATES_INFO = {
     "python": "Creates a Python project with a virtual environment (venv), main.py, and requirements.txt.",
@@ -23,19 +26,21 @@ def create_python_template(project_path: str):
         f.write("# Add your dependencies here\n")
         
     # Create venv
-    print("Creating virtual environment...")
+    # Create venv
+    console.print("[dim]Creating virtual environment...[/dim]")
     try:
-        subprocess.run(["python3", "-m", "venv", "venv"], cwd=path, check=True, capture_output=True)
+        with console.status("[bold cyan]Running python3 -m venv...[/bold cyan]", spinner="dots"):
+            subprocess.run(["python3", "-m", "venv", "venv"], cwd=path, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
-        print("Warning: Failed to create virtual environment (ensure python3-venv is installed).")
+        console.print("[yellow]Warning: Failed to create virtual environment (ensure python3-venv is installed).[/yellow]")
     except FileNotFoundError:
-        print("Warning: python3 not found, skipping virtual environment creation.")
+        console.print("[yellow]Warning: python3 not found, skipping virtual environment creation.[/yellow]")
         
     # Create .gitignore
     with open(path / ".gitignore", "w") as f:
         f.write("venv/\n__pycache__/\n*.pyc\n.env\n")
         
-    print(f"Python template created in {project_path}")
+    console.print(f"[bold green]Python template created successfully in[/bold green] [cyan]{project_path}[/cyan]")
 
 def create_web_template(project_path: str):
     path = Path(project_path)
@@ -65,7 +70,7 @@ def create_web_template(project_path: str):
     with open(path / "script.js", "w") as f:
         f.write('console.log("Hello, Devmate!");\n')
         
-    print(f"Web template created in {project_path}")
+    console.print(f"[bold green]Web template created successfully in[/bold green] [cyan]{project_path}[/cyan]")
 
 def create_node_template(project_path: str):
     path = Path(project_path)
@@ -107,8 +112,8 @@ app.listen(port, () => {
     with open(path / ".gitignore", "w") as f:
         f.write("node_modules/\n.env\n")
 
-    print(f"Node.js template created in {project_path}")
-    print("Run 'npm install' or 'npm install express' to install dependencies.")
+    console.print(f"[bold green]Node.js template created successfully in[/bold green] [cyan]{project_path}[/cyan]")
+    console.print("[dim]Run 'npm install' or 'npm install express' to install dependencies.[/dim]")
 
 def create_react_template(project_path: str):
     path = Path(project_path)
@@ -202,8 +207,8 @@ export default App
     with open(path / ".gitignore", "w") as f:
         f.write("node_modules/\ndist/\ndist-ssr/\n*.local\n.env\n")
 
-    print(f"React template created in {project_path}")
-    print("Run 'npm install' and 'npm run dev' to start the project.")
+    console.print(f"[bold green]React template created successfully in[/bold green] [cyan]{project_path}[/cyan]")
+    console.print("[dim]Run 'npm install' and 'npm run dev' to start the project.[/dim]")
 
 def generate_template(project_name: str, template_type: str):
     if template_type == "python":
@@ -215,4 +220,4 @@ def generate_template(project_name: str, template_type: str):
     elif template_type == "react":
         create_react_template(project_name)
     else:
-        print(f"Unknown template: {template_type}")
+        console.print(f"[bold red]Unknown template:[/bold red] {template_type}")

@@ -2,8 +2,12 @@ from setuptools import setup, find_packages
 
 setup(
     name="devmate",
-    version="0.1.0",
+    version="0.2.0-beta",
     packages=find_packages(),
+    install_requires=[
+        "rich",
+        "questionary"
+    ],
     entry_points={
         "console_scripts": [
             "devmate=devmate.cli:main",
