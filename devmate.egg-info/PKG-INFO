@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: devmate
+Version: 0.1.0
+Summary: A developer workflow automation CLI
+Author: dev
+Requires-Python: >=3.6
+Dynamic: author
+Dynamic: requires-python
+Dynamic: summary

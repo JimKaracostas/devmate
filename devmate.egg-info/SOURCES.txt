@@ -1,0 +1,10 @@
+setup.py
+devmate/__init__.py
+devmate/cli.py
+devmate/git_manager.py
+devmate/templates.py
+devmate.egg-info/PKG-INFO
+devmate.egg-info/SOURCES.txt
+devmate.egg-info/dependency_links.txt
+devmate.egg-info/entry_points.txt
+devmate.egg-info/top_level.txt
